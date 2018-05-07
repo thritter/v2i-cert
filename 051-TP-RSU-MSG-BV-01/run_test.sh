@@ -15,8 +15,8 @@ DATE_END=$(date -u +'%Y%m%d%H%M' -d "+2 min")
 
 echo "Install SRM from ${DATE_START} till ${DATE_END} / disabled"
 snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} \
-  ${RSU_MIB}.4.1.11.0 i 4 \
-  ${RSU_MIB}.4.1.10.0 i 0
+  ${RSU_MIB}.4.1.10.0 i 0 \
+  ${RSU_MIB}.4.1.11.0 i 4
 
 snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} \
   ${RSU_MIB}.4.1.2.0 x 8002 \
