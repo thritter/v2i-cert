@@ -11,24 +11,22 @@ echo "Execute TP-RSU-SNMP-OPR-BV-01"
 TOPDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 source ${TOPDIR}/common.sh
 
-echo "Populate tables"
-snmpset ${RW_AUTH_ARGS} ${SUT_IP} ${RSU_MIB}.4.1.11.0 i 4
-snmpset ${RW_AUTH_ARGS} ${SUT_IP} ${RSU_MIB}.5.1.7.0 i 4
-snmpset ${RW_AUTH_ARGS} ${SUT_IP} ${RSU_MIB}.7.1.11.0 i 4
-snmpset ${RW_AUTH_ARGS} ${SUT_IP} ${RSU_MIB}.13.1.8.0 i 4
-
-
 echo "Walk tree IP MIB"
-snmpwalk ${RW_AUTH_ARGS} ${SUT_IP} ${MGMT_MIB_2}.4
+snmpwalk ${RW_AUTH_ARGS} ${SUT_ADDR} ${MGMT_MIB_2}.4
+
+echo "Populate RSU tables"
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.4.1.11.0 i 4
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.5.1.7.0 i 4
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.7.1.11.0 i 4
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.13.1.8.0 i 4
 
 echo "Walk tree RSU"
-snmpwalk ${RW_AUTH_ARGS} ${SUT_IP} ${RSU_MIB}
-
+snmpwalk ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}
 
 echo "Clear tables"
-snmpset ${RW_AUTH_ARGS} ${SUT_IP} ${RSU_MIB}.4.1.11.0 i 6
-snmpset ${RW_AUTH_ARGS} ${SUT_IP} ${RSU_MIB}.5.1.7.0 i 6
-snmpset ${RW_AUTH_ARGS} ${SUT_IP} ${RSU_MIB}.7.1.11.0 i 6
-snmpset ${RW_AUTH_ARGS} ${SUT_IP} ${RSU_MIB}.13.1.8.0 i 6
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.4.1.11.0 i 6
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.5.1.7.0 i 6
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.7.1.11.0 i 6
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.13.1.8.0 i 6
 
 echo "TP-RSU-SNMP-OPR-BV-01 succeeded"

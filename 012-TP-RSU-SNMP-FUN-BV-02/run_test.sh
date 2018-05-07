@@ -15,7 +15,7 @@ OWN_PORT=2080
 
 echo "Install forward PSID=32 to ${OWN_IP}"
 
-snmpset ${RW_AUTH_ARGS} ${SUT_IP} \
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} \
  ${RSU_MIB}.8.1.0 i ${OWN_PORT} \
  ${RSU_MIB}.8.2.0 x ${OWN_IP} \
  ${RSU_MIB}.8.3.0 s eth0 \
