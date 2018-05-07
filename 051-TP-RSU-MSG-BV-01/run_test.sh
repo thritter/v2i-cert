@@ -6,6 +6,10 @@
 echo "Execute TP-RSU-MSG-BV-01"
 
 #set -x
+
+DATE_START=$(date -u +'%m/%d/%Y, %H:%M')
+DATE_END=$(date -u +'%m/%d/%Y, %H:%M' -d "+2 min")
+
 TOPDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 source ${TOPDIR}/common.sh
 
@@ -20,9 +24,10 @@ snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} \
   ${RSU_MIB}.5.1.6.0 i 1
 
 echo "Xmit MAP"
-nc -u -w 1 ${SUT_IP} ${IFM_PORT} < map.conf
+sed -e "s+%DATE_START%+${DATE_START}+" -e "s+%DATE_END%+${DATE_END}+" map.conf > my_map_xmit.txt
+nc -u -w 1 ${SUT_IP} ${IFM_PORT} < my_map_xmit.txt
 
-sleep 10
+sleep 180
 
 echo "Clear SNMP table"
 snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.5.1.7.0 i 6
