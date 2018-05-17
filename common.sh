@@ -11,6 +11,7 @@ export SUT_IP="${ARGS[0]}"
 export SUT_ADDR="udp:${ARGS[0]}:161"
 export SUT_NETIF=${ARGS[4]}
 export RW_AUTH_ARGS="-t 2 -v 3 -l authPriv -a SHA -A ${ARGS[2]} -x AES -X ${ARGS[3]} -u ${ARGS[1]}"
+export RW_AUTH_ARGS_WRONG_CRED="-t 2 -v 3 -l authPriv -a SHA -A 'invalidPassword' -x AES -X ${ARGS[3]} -u ${ARGS[1]}"
 
 export RSU_MIB="iso.0.15628.4.1"
 export MGMT_MIB_2="iso.3.6.1.2.1"
