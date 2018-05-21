@@ -1,15 +1,5 @@
 #!/bin/bash -e
 
-# Roadside unit DSRC Radios in Alternating Mode shall be capable of switching to the
-# configured Service Channel every Service Channel interval with no time interval restrictions.
-
-#!/bin/bash -e
-
-# The roadside unit shall support Continuous Mode and Alternating Mode radio
-# operations simultaneously
-
-#!/bin/bash -e
-
 # Verify that RSU transmits WSA with Service Channel (SCH) Services based on the
 # Store and Repeat Messages (SRM) contained in MIB OID 1.0.15628.4.1.4
 # SRM services configured for the Control Channel (CCH), 178 are NOT included in the WSA
