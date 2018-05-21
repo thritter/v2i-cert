@@ -20,10 +20,10 @@ snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} \
   ${RSU_MIB}.7.1.3.0 x ${OWN_IP} \
   ${RSU_MIB}.7.1.4.0 i ${OWN_PORT} \
   ${RSU_MIB}.7.1.5.0 i 2 \
-  ${RSU_MIB}.7.1.6.0 i -100  \
-  ${RSU_MIB}.7.1.7.0 i  1  \
-  ${RSU_MIB}.7.1.8.0 s 201601010000 \
-  ${RSU_MIB}.7.1.9.0 s 202612312359
+  ${RSU_MIB}.7.1.6.0 i -100 \
+  ${RSU_MIB}.7.1.7.0 i 1 \
+  ${RSU_MIB}.7.1.8.0 x 201601010000 \
+  ${RSU_MIB}.7.1.9.0 x 202612312359
 snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.7.1.10.0 i 1
 
 echo "Start WSM transmission now"
