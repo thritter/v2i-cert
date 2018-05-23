@@ -6,4 +6,4 @@ source ${TOPDIR}/common.sh
 snmpwalk ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}
 
 echo "Clear table"
-snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.7.1.11.0 i 6
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.7.1.11.1 i 6

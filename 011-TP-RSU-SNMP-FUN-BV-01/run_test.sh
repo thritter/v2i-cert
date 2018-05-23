@@ -6,32 +6,40 @@
 
 echo "Execute TP-RSU-SNMP-FUN-BV-01"
 
-#set -x
+set -x
 TOPDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 source ${TOPDIR}/common.sh
 
 OWN_IP=$(get_ipv6_from_netif_hex ${SUT_NETIF})
 OWN_PORT=2099
 
-echo "Install forward PSID=32 to ${OWN_IP}"
-snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.7.1.11.0 i 4
+#printf -v DS_YEAR '%04x' `date -u +'%Y'`
+#printf -v DS_MON '%04x' `date -u +'%m'`
+
+DATE_START=$(date -u +'%Y%m%d%H%M' -d "+1 minute")
+DATE_END=$(date -u +'%Y%m%d%H%M' -d "+3 minute")
+
+echo "Install forward PSID=32 to ${OWN_IP} from ${DATE_START} to ${DATE_END}"
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.7.1.11.1 i 4
 snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} \
-  ${RSU_MIB}.7.1.2.0 x 20 \
-  ${RSU_MIB}.7.1.3.0 x ${OWN_IP} \
-  ${RSU_MIB}.7.1.4.0 i ${OWN_PORT} \
-  ${RSU_MIB}.7.1.5.0 i 2 \
-  ${RSU_MIB}.7.1.6.0 i -100 \
-  ${RSU_MIB}.7.1.7.0 i 1 \
-  ${RSU_MIB}.7.1.8.0 x 201601010000 \
-  ${RSU_MIB}.7.1.9.0 x 202612312359
-snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.7.1.10.0 i 1
+  ${RSU_MIB}.7.1.2.1 x 20 \
+  ${RSU_MIB}.7.1.3.1 x ${OWN_IP} \
+  ${RSU_MIB}.7.1.4.1 i ${OWN_PORT} \
+  ${RSU_MIB}.7.1.5.1 i 2 \
+  ${RSU_MIB}.7.1.6.1 i -100 \
+  ${RSU_MIB}.7.1.7.1 i 1 \
+  ${RSU_MIB}.7.1.8.1 x ${DATE_START} \
+  ${RSU_MIB}.7.1.9.1 x ${DATE_END}
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.7.1.10.1 i 1
 
 echo "Start WSM transmission now"
 set +e
 sudo nc -6 -kluv -p ${OWN_PORT}
 set -e
 
+pause "Hit Enter to clear table"
+
 echo "Clear table"
-snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.7.1.11.0 i 6
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.7.1.11.1 i 6
 
 echo "TP-RSU-SNMP-FUN-BV-01 succeeded"
