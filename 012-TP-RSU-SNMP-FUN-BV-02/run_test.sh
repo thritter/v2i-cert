@@ -19,10 +19,10 @@ OWN_PORT=2080
 RSU_INTERFACE=eth0
 
 snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} \
- ${RSU_MIB}.8.1.0 i ${OWN_PORT} 
- #${RSU_MIB}.8.2.0 x ${OWN_IP} \
- #${RSU_MIB}.8.3.0 s ${RSU_INTERFACE} \
- #${RSU_MIB}.8.4.0 i 60
+ ${RSU_MIB}.8.1.0 i ${OWN_PORT} \
+ ${RSU_MIB}.8.2.0 x ${OWN_IP} \
+ ${RSU_MIB}.8.3.0 s ${RSU_INTERFACE} \
+ ${RSU_MIB}.8.4.0 i 60
 
 set +e 
 sudo nc -6 -kluv -p ${OWN_PORT}
