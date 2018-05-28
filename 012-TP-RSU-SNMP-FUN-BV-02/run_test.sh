@@ -4,11 +4,11 @@
 # port at a specified rate, upon acquisition of 3 or more Satellites, as configured in
 # SNMPv3 MIB OID 1.0.15628.4.1.8.
 
-echo "Execute TP-RSU-SNMP-FUN-BV-02"
-
-set -x
+#set -x
 TOPDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 source ${TOPDIR}/common.sh
+
+echo_ "Executing TP-RSU-SNMP-FUN-BV-02"
 
 snmpwalk ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.8
 
@@ -22,10 +22,10 @@ snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} \
  ${RSU_MIB}.8.1.0 i ${OWN_PORT} \
  ${RSU_MIB}.8.2.0 x ${OWN_IP} \
  ${RSU_MIB}.8.3.0 s ${RSU_INTERFACE} \
- ${RSU_MIB}.8.4.0 i 60
+ ${RSU_MIB}.8.4.0 i 60 
 
 set +e 
 sudo nc -6 -kluv -p ${OWN_PORT}
 set -e
 
-echo "TP-RSU-SNMP-FUN-BV-02 succeeded"
+echo_ "TP-RSU-SNMP-FUN-BV-02 completed"

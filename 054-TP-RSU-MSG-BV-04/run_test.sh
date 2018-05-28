@@ -10,20 +10,22 @@ source ${TOPDIR}/common.sh
 
 #set -x
 
-echo "Setup RSU Immediate Forward Message via SNMP"
-snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.5.1.7.0 i 4
+echo_ "Setup RSU Immediate Forward Message via SNMP"
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.5.1.7.50 i 4
 
 snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} \
-  ${RSU_MIB}.5.1.2.0 x 8002 \
-  ${RSU_MIB}.5.1.3.0 i 1 \
-  ${RSU_MIB}.5.1.4.0 i 0 \
-  ${RSU_MIB}.5.1.5.0 i 172 \
-  ${RSU_MIB}.5.1.6.0 i 1
+  ${RSU_MIB}.5.1.2.50 x 8002 \
+  ${RSU_MIB}.5.1.3.50 i 1 \
+  ${RSU_MIB}.5.1.4.50 i 0 \
+  ${RSU_MIB}.5.1.5.50 i 172 \
+  ${RSU_MIB}.5.1.6.50 i 1
 
-echo "Xmit IFM MAP"
+echo_ "Xmit IFM MAP"
+set +e
 nc -u -w 1 ${SUT_IP} ${IFM_PORT} < map.conf
+set -e
 
-echo "Clear SNMP table"
-snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.5.1.7.0 i 6
+echo_ "Clear SNMP table"
+snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.5.1.7.50 i 6
 
-echo "Done TP-RSU-MSG-BV-04"
+echo_ "Done TP-RSU-MSG-BV-04"

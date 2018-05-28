@@ -6,18 +6,17 @@
 
 echo "Execute TP-RSU-SNMP-FUN-BV-01"
 
-set -x
+#set -x
 TOPDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )"/.. && pwd )"
 source ${TOPDIR}/common.sh
 
 OWN_IP=$(get_ipv6_from_netif_hex ${SUT_NETIF})
 OWN_PORT=2099
 
-#printf -v DS_YEAR '%04x' `date -u +'%Y'`
-#printf -v DS_MON '%04x' `date -u +'%m'`
-
-DATE_START=$(date -u +'%Y%m%d%H%M' -d "+1 minute")
-DATE_END=$(date -u +'%Y%m%d%H%M' -d "+3 minute")
+#DATE_START=$(date -u +'%Y%m%d%H%M' -d "+1 minute")
+#DATE_END=$(date -u +'%Y%m%d%H%M' -d "+3 minute")
+DATE_START=$(set_date "+1 minute") 
+DATE_END=$(set_date "+3 minute")
 
 echo "Install forward PSID=32 to ${OWN_IP} from ${DATE_START} to ${DATE_END}"
 snmpset ${RW_AUTH_ARGS} ${SUT_ADDR} ${RSU_MIB}.7.1.11.1 i 4
